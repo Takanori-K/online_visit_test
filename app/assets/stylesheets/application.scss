@@ -39,3 +39,26 @@
    background: rgba(255, 255, 255,0.4);
    margin-top: 200px;
  }
+ 
+/* User-new */
+ .jumbotron {
+  margin-top: 30px;
+ }
+ 
+ #image-user {
+   background: rgba(255, 255, 255,0.6);
+ }
+ 
+/* error_messages */
+
+ #error_explanation {
+   color: red;
+   ul {
+     color: red;
+     margin: 0 0 30px 0;
+   }
+ }
+
+ .alert-danger {
+   color: red;
+ } 
