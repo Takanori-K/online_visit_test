@@ -16,14 +16,14 @@
           </a>
           <ul class="dropdown-menu">
             <li class="nav-item">
-              <%= link_to "Show", user_path(current_user), class: "nav-link" %>
+              <%= link_to "マイページ", user_path(current_user), class: "nav-link" %>
             </li>
             <li class="nav-item">
               <%= link_to "編集", edit_user_path, class: "nav-link" %>
             </li>
             <li class="divider"></li>
             <li class="nav-item">
-              <%= link_to "Logout", logout_path, method: :delete, class: "nav-link" %>
+              <%= link_to "ログアウト", logout_path, method: :delete, class: "nav-link" %>
             </li>
           </ul>
         </li>
