@@ -13,3 +13,29 @@
  *= require_tree .
  *= require_self
  */
+ 
+ @import "bootstrap";
+ @import "font-awesome-sprockets";
+ @import "font-awesome";
+ 
+ 
+/* Top */
+
+ .image-top {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: white;
+    z-index: -1;
+    background-position: center 50%;
+    background-repeat: no-repeat;
+    background-image: url(/image/top.jpg);
+    background-size: cover;
+ }
+ 
+ #image-background {
+   background: rgba(255, 255, 255,0.4);
+   margin-top: 200px;
+ }

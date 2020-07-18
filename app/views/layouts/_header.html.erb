@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <%= link_to 'Online_Visit_App', root_path, class: "navbar-brand" %>
+  <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+      
+  <div class="collapse navbar-collapse" id="Navber">
+    <ul class="navbar-nav mr-auto">
+      <% if logged_in? %>
+        <li class="nav-item">
+          <%= link_to "予約する", '#', class: "nav-link" %>
+        </li>
+        <li class="dropdown nav-item">
+          <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+            Account <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="nav-item">
+              <%= link_to "Show", "#", class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "編集", "#", class: "nav-link" %>
+            </li>
+            <li class="divider"></li>
+            <li class="nav-item">
+              <%= link_to "Logout", "#", method: :delete, class: "nav-link" %>
+            </li>
+          </ul>
+        </li>
+      <% else %>    
+        <li class="nav-item">
+          <%= link_to "ログイン", "#", class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "新規登録", "#", class: "nav-link" %>
+        </li>
+      <% end %>  
+    </ul>
+  </div>
+</nav>
