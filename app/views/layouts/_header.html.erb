@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <%= link_to 'Online_Visit_App', root_path, class: "navbar-brand" %>
+<nav class="navbar navbar-expand-lg navbar-light">
+  <strong><%= link_to 'Online_Visit_App', root_path, class: "navbar-brand" %></strong>
   <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -16,23 +16,23 @@
           </a>
           <ul class="dropdown-menu">
             <li class="nav-item">
-              <%= link_to "Show", "#", class: "nav-link" %>
+              <%= link_to "Show", user_path(current_user), class: "nav-link" %>
             </li>
             <li class="nav-item">
-              <%= link_to "編集", "#", class: "nav-link" %>
+              <%= link_to "編集", edit_user_path, class: "nav-link" %>
             </li>
             <li class="divider"></li>
             <li class="nav-item">
-              <%= link_to "Logout", "#", method: :delete, class: "nav-link" %>
+              <%= link_to "Logout", logout_path, method: :delete, class: "nav-link" %>
             </li>
           </ul>
         </li>
       <% else %>    
         <li class="nav-item">
-          <%= link_to "ログイン", "#", class: "nav-link" %>
+          <%= link_to "ログイン", login_path, class: "nav-link" %>
         </li>
         <li class="nav-item">
-          <%= link_to "新規登録", "#", class: "nav-link" %>
+          <%= link_to "新規登録", new_user_path, class: "nav-link" %>
         </li>
       <% end %>  
     </ul>
