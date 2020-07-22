@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  
-  get 'sessions/new'
-
-  get 'users/new'
 
   root 'static_pages#top'
-  resources :users
+  resources :users do
+    member do
+      get 'video_chat'
+    end
+  end
   
   get    '/login', to: 'sessions#new'
   post   '/login', to: 'sessions#create'

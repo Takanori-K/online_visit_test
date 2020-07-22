@@ -5,11 +5,25 @@
   </button>
       
   <div class="collapse navbar-collapse" id="Navber">
+    <ul class="navbar-nav mr-auto"> 
+    </ul>
+    <ul class="navbar-nav mr-auto"> 
+    </ul>
     <ul class="navbar-nav mr-auto">
       <% if logged_in? %>
+        <% unless current_user.admin? %>
+          <li class="nav-item">
+            <%= link_to "予約する", '#', class: "nav-link" %>
+          </li>&emsp;
+        <% end %>
+        <% if current_user.admin? %>
+          <li class="nav-item">
+            <%= link_to "Users", users_path, class: "nav-link" %>
+          </li>&emsp;
+        <% end %>
         <li class="nav-item">
-          <%= link_to "予約する", '#', class: "nav-link" %>
-        </li>
+          <%= link_to "Video_Chat", video_chat_user_path(current_user), class: "nav-link" %>
+        </li>&emsp;
         <li class="dropdown nav-item">
           <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
             Account <b class="caret"></b>
@@ -27,14 +41,14 @@
             </li>
           </ul>
         </li>
-      <% else %>    
+      <% else %>
         <li class="nav-item">
           <%= link_to "ログイン", login_path, class: "nav-link" %>
-        </li>
+        </li>&emsp;
         <li class="nav-item">
           <%= link_to "新規登録", new_user_path, class: "nav-link" %>
-        </li>
-      <% end %>  
-    </ul>
+        </li>&emsp;
+      <% end %>   
+    </ul>  
   </div>
 </nav>

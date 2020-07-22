@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :video_chat, :update, :destroy]
   before_action :logged_in_user, only: [:show, :index, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: :destroy
@@ -21,11 +21,14 @@ class UsersController < ApplicationController
   end
   
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.where(admin: false).paginate(page: params[:page])
   end
 
   
   def show
+  end
+  
+  def video_chat
   end
   
   def edit

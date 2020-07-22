@@ -1,0 +1,26 @@
+<% provide(:title, 'index') %>
+
+<div class="col-12">
+  <div class="mx-auto text-center"><h1>ユーザー一覧</h1></div><br>
+  <table class="table" id="table-users">
+    <thead class="thead-dark">
+      <tr>
+        <th><%= User.human_attribute_name :name %></th>
+        <th>編集</th>
+        <th>削除</th>
+      </tr>
+    </thead>
+
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.name, user %></td>
+        <td><%= link_to "編集", edit_user_path(user), class: "btn btn-success" %></td>
+        <td>
+          <%= link_to "削除", user, method: :delete,
+            data: { confirm: "削除してよろしいですか？" },
+            class: "btn btn-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
