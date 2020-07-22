@@ -5,7 +5,7 @@ gem 'puma',         '~> 3.7'
 gem 'rails-i18n'
 gem 'bcrypt'
 gem 'faker'
-gem 'will_paginate' # この行を追加してください。
+gem 'will_paginate-bootstrap4'
 gem 'bootstrap-will_paginate'
 gem 'sass-rails',   '~> 5.0'
 gem 'uglifier',     '>= 1.3.0'

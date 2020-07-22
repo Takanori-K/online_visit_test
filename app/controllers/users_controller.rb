@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
   
-  before_action :set_user, only: [:show, :edit, :video_chat, :update, :destroy]
-  before_action :logged_in_user, only: [:show, :index, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :video_chat, :secret_word, :update, :destroy]
+  before_action :logged_in_user, only: [:show, :index, :video_chat, :secret_word, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update]
-  before_action :admin_user, only: :destroy
+  before_action :admin_user, only: [:secret_word, :destroy]
   
   def new
     @user = User.new
@@ -29,6 +29,13 @@ class UsersController < ApplicationController
   end
   
   def video_chat
+  end
+  
+  def secret_word
+    @admin = User.find_by(admin: true)
+    flash[:success] = "ユーザに合言葉を送りました。"
+    NotificationMailer.secret_mail(@user, @admin).deliver if current_user.email.present?
+    redirect_to video_chat_user_url
   end
   
   def edit

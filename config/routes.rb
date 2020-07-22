@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     end
   end
   
+  post   '/users/:id/secret_word/:id', to: 'users#secret_word', as: :secret_word
   get    '/login', to: 'sessions#new'
   post   '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'

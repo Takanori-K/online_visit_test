@@ -1,6 +1,8 @@
 <% provide(:title, 'index') %>
 
 <div class="col-12">
+  <%= will_paginate(@users, class: "pagination justify-content-center",
+                          renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
   <div class="mx-auto text-center"><h1>ユーザー一覧</h1></div><br>
   <table class="table" id="table-users">
     <thead class="thead-dark">
@@ -8,6 +10,7 @@
         <th><%= User.human_attribute_name :name %></th>
         <th>編集</th>
         <th>削除</th>
+        <th> Video_Chat</th>
       </tr>
     </thead>
 
@@ -20,7 +23,14 @@
             data: { confirm: "削除してよろしいですか？" },
             class: "btn btn-danger" %>
         </td>
+        <td>
+          <%= link_to "Video_Chat_password", secret_word_path(user), method: :post,
+          data: { confirm: "送信してよろしいですか？" },
+          class: "btn btn-info" %> 
+        </td>
       </tr>
     <% end %>
   </table>
+  <%= will_paginate(@users, class: "pagination justify-content-center",
+                          renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
 </div>
