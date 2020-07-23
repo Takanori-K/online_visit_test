@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
   
-  before_action :set_user, only: [:show, :edit, :video_chat, :secret_word, :secret_word_create, :update, :destroy]
-  before_action :logged_in_user, only: [:show, :index, :video_chat, :secret_word, :secret_word_create, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :video_chat, :secret_word, :secret_word_update, :update, :destroy]
+  before_action :logged_in_user, only: [:show, :index, :video_chat, :secret_word, :secret_word_update, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update]
-  before_action :admin_user, only: [:secret_word, :secret_word_create, :destroy]
+  before_action :admin_user, only: [:secret_word, :secret_word_update, :destroy]
   
   def new
     @user = User.new
@@ -34,11 +34,15 @@ class UsersController < ApplicationController
   def secret_word
   end
   
-  def secret_word_create
+  def secret_word_update
     @admin = User.find_by(admin: true)
-    flash[:success] = "ユーザに合言葉を送りました。"
-    NotificationMailer.secret_mail(@user, @admin).deliver if current_user.email.present?
-    redirect_to video_chat_user_url
+    if @user.update_attributes(secret_params)
+      flash[:success] = "ユーザに合言葉を送信しました。"
+      NotificationMailer.secret_mail(@user, @admin).deliver if current_user.email.present?
+    else
+      flash[:danger] = "送信できませんでした。"
+    end
+    redirect_to users_url
   end
   
   def edit
@@ -60,8 +64,13 @@ class UsersController < ApplicationController
   end
   
   private
+  
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    end
+    
+    def secret_params
+      params.require(:user).permit(:secret_word)
     end
     
     def set_user

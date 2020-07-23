@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     member do
       get  'video_chat'
       get  'secret_word'
-      post 'secret_word_create'
+      patch 'secret_word_update'
     end
   end
   

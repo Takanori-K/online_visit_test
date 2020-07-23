@@ -81,3 +81,23 @@
     vertical-align: middle;
   }  
 }
+
+/* モーダル */
+
+.modal.fade .modal-dialog {
+  -webkit-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
+
+.modal-dialog-center {
+  padding-top: 10%;
+}
+
+.label-secret-word {
+  margin-top: 5px;
+}
+
+.btn-secret-word {
+  margin: 15px 0;
+  width: 30%;
+}
