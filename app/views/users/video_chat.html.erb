@@ -11,7 +11,7 @@
         <div>
           <video id="js-local-stream"></video>
           <span id="js-room-mode"></span>:
-          <input type="text" placeholder="Room Nameを入力" id="js-room-id">
+          <input type="text" placeholder="Room Nameを入力" value="<%= @user.secret_word %>" id="js-room-id">
           <button id="js-join-trigger">入室</button>
           <button id="js-leave-trigger">退室</button>
         </div>
@@ -96,7 +96,7 @@
       });
   
       room.once('open', () => {
-        messages.textContent += '=== You joined ===\n';
+        messages.textContent += '=== You joint ===\n';
       });
       room.on('peerJoin', peerId => {
         messages.textContent += `=== ${peerId} joined ===\n`;
