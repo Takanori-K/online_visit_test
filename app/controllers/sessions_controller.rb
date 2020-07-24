@@ -8,7 +8,11 @@ class SessionsController < ApplicationController
       log_in user
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       flash[:success] = "ログインしました。"
-      redirect_back_or user
+      if user.admin?
+        redirect_to users_url
+      else
+        redirect_back_or user
+      end
     else
       flash.now[:danger] = 'メールアドレスとパスワードの組み合わせは有効ではありません'
       render 'new'

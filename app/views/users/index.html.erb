@@ -10,7 +10,9 @@
         <th><%= User.human_attribute_name :name %></th>
         <th>編集</th>
         <th>削除</th>
-        <th> Video_Chat</th>
+        <th>Room Nameの設定</th>
+        <th>Room Name</th>
+        <th>Video_Chat</th>
       </tr>
     </thead>
 
@@ -26,9 +28,19 @@
         <td>
           <%= link_to "Video_Chat_password", secret_word_user_path(user), remote: true, class: "btn btn-info" %> 
         </td>
+        <td>
+          <%= user.secret_word %>
+        </td>
+        <td>
+          <%= link_to "Video_Chat", video_chat_user_path(user), class: "btn btn-warning" %>
+        </td>
       </tr>
     <% end %>
-  </table>
+  </table><br>
+  <div class="text-center">
+    <%= link_to "マイページ", user_path(current_user), class: "btn btn-lg btn-primary" %>
+  </div>
+  
   <%= will_paginate(@users, class: "pagination justify-content-center",
                           renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
 </div>

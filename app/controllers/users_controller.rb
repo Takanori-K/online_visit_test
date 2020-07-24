@@ -2,7 +2,8 @@ class UsersController < ApplicationController
   
   before_action :set_user, only: [:show, :edit, :video_chat, :secret_word, :secret_word_update, :update, :destroy]
   before_action :logged_in_user, only: [:show, :index, :video_chat, :secret_word, :secret_word_update, :edit, :update, :destroy]
-  before_action :correct_user, only: [:edit, :update]
+  before_action :correct_user, only: :update
+  before_action :admin_or_correct_user, only: [:edit, :update, :video_chat]
   before_action :admin_user, only: [:secret_word, :secret_word_update, :destroy]
   
   def new
@@ -98,5 +99,13 @@ class UsersController < ApplicationController
         flash[:danger] = "アクセス権限がありません"
         redirect_to(root_url)
       end
+    end
+    
+    def admin_or_correct_user
+      @user = User.find(params[:user_id]) if @user.blank?
+      unless current_user?(@user) || current_user.admin?
+        flash[:danger] = "アクセス権限がありません。"
+        redirect_to(root_url)
+      end  
     end
 end

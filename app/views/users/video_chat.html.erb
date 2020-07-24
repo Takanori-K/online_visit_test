@@ -11,22 +11,27 @@
         <div>
           <video id="js-local-stream"></video>
           <span id="js-room-mode"></span>:
-          <input type="text" placeholder="Room Name" id="js-room-id">
-          <button id="js-join-trigger">Join</button>
-          <button id="js-leave-trigger">Leave</button>
+          <input type="text" placeholder="Room Nameを入力" id="js-room-id">
+          <button id="js-join-trigger">入室</button>
+          <button id="js-leave-trigger">退室</button>
         </div>
     
-        <div class="remote-streams" id="js-remote-streams"></div>
-    
+        <div class="remote-streams" id="js-remote-streams"></div><br>
+        <h3><strong>Room Name:&emsp;<font color="bule"><%= @user.secret_word %></font></strong></h3>
         <div>
           <pre class="messages" id="js-messages"></pre>
           <input type="text" id="js-local-text">
-          <button id="js-send-trigger">send</button>
+          <button id="js-send-trigger">送る</button>
         </div>
       </div>
       <p class="meta" id="js-meta"></p>
     </div>
-  </div>  
+    <% if current_user.admin? %>
+      <div class="text-center"><%= link_to "ユーザー一覧", users_path, class: "btn btn-lg btn-primary" %></div>
+    <% else %>
+      <div class="text-center"><%= link_to "マイページ", user_url, class: "btn btn-lg btn-primary" %></div>
+    <% end %>  
+  </div> 
 </div>
 
 <script>
