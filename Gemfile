@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails',        '~> 5.1.6'
 gem 'puma',         '~> 3.7'
+gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 gem 'rails-i18n'
 gem 'bcrypt'
 gem 'faker'
@@ -17,7 +18,7 @@ gem 'turbolinks',   '~> 5'
 gem 'jbuilder',     '~> 2.5'
 
 group :development, :test do
-  gem 'sqlite3'
+  #gem 'sqlite3'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
