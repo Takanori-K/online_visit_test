@@ -35,6 +35,9 @@ class UsersController < ApplicationController
   def secret_word
   end
 
+  def android_video
+  end
+
   def secret_word_update
     @admin = User.find_by(admin: true)
     if @user.update_attributes(secret_params)

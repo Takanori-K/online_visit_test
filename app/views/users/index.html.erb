@@ -13,6 +13,7 @@
         <th>Room Nameの設定</th>
         <th>Room Name</th>
         <th>Video_Chat</th>
+        <th>Android_chat</th>
       </tr>
     </thead>
 
@@ -26,7 +27,7 @@
             class: "btn btn-danger" %>
         </td>
         <td>
-          <%= link_to "Video_Chat_password", secret_word_user_path(user), remote: true, class: "btn btn-info" %> 
+          <%= link_to "Video_Chat_password", secret_word_user_path(user), remote: true, class: "btn btn-info" %>
         </td>
         <td>
           <%= user.secret_word %>
@@ -34,13 +35,16 @@
         <td>
           <%= link_to "Video_Chat", video_chat_user_path(user), class: "btn btn-warning" %>
         </td>
+        <td>
+          <%= link_to "Android_chat",  android_video_user_path(user), class: "btn btn-primary" %>
+        </td>
       </tr>
     <% end %>
   </table><br>
   <div class="text-center">
     <%= link_to "マイページ", user_path(current_user), class: "btn btn-lg btn-primary" %>
   </div>
-  
+
   <%= will_paginate(@users, class: "pagination justify-content-center",
                           renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
 </div>
