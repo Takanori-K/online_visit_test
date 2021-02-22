@@ -15,7 +15,7 @@
           <button id="js-join-trigger">入室</button>
           <button id="js-leave-trigger">退室</button>
         </div>
-    
+
         <div class="remote-streams" id="js-remote-streams"></div><br>
         <h3><strong>Room Name:&emsp;<font color="bule"><%= @user.secret_word %></font></strong></h3>
         <div>
@@ -30,8 +30,8 @@
       <div class="text-center"><%= link_to "ユーザー一覧", users_path, class: "btn btn-lg btn-primary" %></div>
     <% else %>
       <div class="text-center"><%= link_to "マイページ", user_url, class: "btn btn-lg btn-primary" %></div>
-    <% end %>  
-  </div> 
+    <% end %>
+  </div>
 </div>
 
 <script>
@@ -49,39 +49,40 @@
     const messages = document.getElementById('js-messages');
     const meta = document.getElementById('js-meta');
     const sdkSrc = document.querySelector('script[src*=skyway]');
-  
+
     meta.innerText = `
       UA: ${navigator.userAgent}
       SDK: ${sdkSrc ? sdkSrc.src : 'unknown'}
     `.trim();
-  
+
     const getRoomModeByHash = () => (location.hash === '#sfu' ? 'sfu' : 'mesh');
-  
+
     roomMode.textContent = getRoomModeByHash();
     window.addEventListener(
       'hashchange',
       () => (roomMode.textContent = getRoomModeByHash())
     );
-  
+
     const localStream = await navigator.mediaDevices
       .getUserMedia({
         audio: true,
         video: true,
       })
       .catch(console.error);
-  
+
     // Render local stream
     localVideo.muted = true;
     localVideo.srcObject = localStream;
     localVideo.playsInline = true;
+    localVideo.autoplay = true;
     await localVideo.play().catch(console.error);
-  
+
     // eslint-disable-next-line require-atomic-updates
     const peer = (window.peer = new Peer({
       key: "56ce0219-dc92-4ccb-98e3-4fe9bc9be693",
       debug: 3,
     }));
-  
+
     // Register join handler
     joinTrigger.addEventListener('click', () => {
       // Note that you need to ensure the peer has connected to signaling server
@@ -89,19 +90,19 @@
       if (!peer.open) {
         return;
       }
-  
+
       const room = peer.joinRoom(roomId.value, {
         mode: getRoomModeByHash(),
         stream: localStream,
       });
-  
+
       room.once('open', () => {
         messages.textContent += '=== You joint ===\n';
       });
       room.on('peerJoin', peerId => {
         messages.textContent += `=== ${peerId} joined ===\n`;
       });
-  
+
       // Render remote stream for new peer join in the room
       room.on('stream', async stream => {
         const newVideo = document.createElement('video');
@@ -112,12 +113,12 @@
         remoteVideos.append(newVideo);
         await newVideo.play().catch(console.error);
       });
-  
+
       room.on('data', ({ data, src }) => {
         // Show a message sent to the room and who sent
         messages.textContent += `${src}: ${data}\n`;
       });
-  
+
       // for closing room members
       room.on('peerLeave', peerId => {
         const remoteVideo = remoteVideos.querySelector(
@@ -126,10 +127,10 @@
         remoteVideo.srcObject.getTracks().forEach(track => track.stop());
         remoteVideo.srcObject = null;
         remoteVideo.remove();
-  
+
         messages.textContent += `=== ${peerId} left ===\n`;
       });
-  
+
       // for closing myself
       room.once('close', () => {
         sendTrigger.removeEventListener('click', onClickSend);
@@ -140,19 +141,19 @@
           remoteVideo.remove();
         });
       });
-  
+
       sendTrigger.addEventListener('click', onClickSend);
       leaveTrigger.addEventListener('click', () => room.close(), { once: true });
-  
+
       function onClickSend() {
         // Send message to all of the peers in the room via websocket
         room.send(localText.value);
-  
+
         messages.textContent += `${peer.id}: ${localText.value}\n`;
         localText.value = '';
       }
     });
-  
+
     peer.on('error', console.error);
   })();
 </script>
